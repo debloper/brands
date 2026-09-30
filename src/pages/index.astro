@@ -1,0 +1,56 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
+import { getBrands } from '@/lib/brands';
+
+const brands = getBrands();
+---
+
+<BaseLayout title="Brand Guides" description="Design system and brand guides for every entity.">
+  <ThemeToggle />
+  <div class="max-w-5xl mx-auto px-6 md:px-10 py-16 md:py-24">
+    <h1 class="text-3xl md:text-4xl font-medium tracking-tight mb-3">Brand Guides</h1>
+    <p class="text-muted-foreground max-w-2xl mb-12">
+      Design systems and brand assets for every entity. Pick a guide below — each one is
+      themed with its own brand's colors and typography.
+    </p>
+
+    {
+      brands.length === 0 ? (
+        <p class="text-muted-foreground text-sm">
+          No brands found yet. See <code>design.md</code> for how to add one.
+        </p>
+      ) : (
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {brands.map((brand) => (
+            <a
+              href={`${import.meta.env.BASE_URL}${brand.slug}/`}
+              class="group rounded-2xl border border-border overflow-hidden transition-shadow hover:shadow-md"
+            >
+              <div
+                class="h-28 flex items-end p-5"
+                style={{ backgroundColor: brand.meta.colors.background }}
+              >
+                <span
+                  class="text-lg font-medium tracking-tight"
+                  style={{ color: brand.meta.colors.foreground }}
+                >
+                  {brand.meta.name}
+                </span>
+              </div>
+              <div class="p-5 bg-card">
+                <p class="text-sm text-muted-foreground">{brand.meta.tagline}</p>
+                <p
+                  class="mt-3 text-xs font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all"
+                  style={{ color: brand.meta.colors.accent }}
+                >
+                  View guide &rarr;
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>

@@ -1,0 +1,48 @@
+/*
+ * Replace every value below with your brand's own tokens, then keep the
+ * same variable names (`--background`, `--foreground`, etc.) so the shared
+ * layouts and any shadcn/ui-style components continue to work unmodified.
+ *
+ * The `.dark` block below is scaffolding for brand-level dark/light mode, which isn't wired
+ * up yet (only the landing page has a theme toggle so far — see design.md "Dark/light mode").
+ * Keep it filled in with real values; when brand theming ships it'll be toggled the same way,
+ * via `src/components/ThemeToggle.astro`.
+ */
+:root {
+  --radius: 0.625rem;
+  --background: #ffffff;
+  --foreground: #111111;
+  --card: #ffffff;
+  --card-foreground: #111111;
+  --primary: #111111;
+  --primary-foreground: #ffffff;
+  --secondary: #f0f0f0;
+  --secondary-foreground: #111111;
+  --muted: #f0f0f0;
+  --muted-foreground: #666666;
+  --accent: #e0e0e0;
+  --accent-foreground: #111111;
+  --destructive: #d4183d;
+  --border: #e0e0e0;
+  --input: #e0e0e0;
+  --ring: #888888;
+}
+
+.dark {
+  --background: #111111;
+  --foreground: #ffffff;
+  --card: #1a1a1a;
+  --card-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #111111;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #ffffff;
+  --muted: #2a2a2a;
+  --muted-foreground: #999999;
+  --accent: #2a2a2a;
+  --accent-foreground: #ffffff;
+  --destructive: #e63950;
+  --border: #333333;
+  --input: #333333;
+  --ring: #888888;
+}

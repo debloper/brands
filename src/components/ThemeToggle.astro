@@ -1,0 +1,38 @@
+---
+// Self-contained: drop `<ThemeToggle />` as the first thing inside <body> (it renders
+// `position: fixed`, so placement in the DOM doesn't affect layout) and it handles
+// everything — reading/applying the stored or system preference before paint, and
+// toggling + persisting it on click. Not yet used on brand pages — see design.md
+// "Dark/light mode" for the plan to reuse this once brand-level theming is added.
+---
+
+{/* is:inline + placed first: runs synchronously before paint, so there's no flash of the wrong theme. */}
+<script is:inline>
+  (function () {
+    const stored = localStorage.getItem('theme');
+    const dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.classList.toggle('dark', dark);
+  })();
+</script>
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Toggle dark mode"
+  class="fixed top-4 right-4 z-50 rounded-full border border-border bg-background p-2 text-foreground shadow-sm hover:bg-accent transition-colors cursor-pointer"
+>
+  <svg class="block dark:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+  </svg>
+  <svg class="hidden dark:block" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+  </svg>
+</button>
+
+<script>
+  document.getElementById('theme-toggle')?.addEventListener('click', () => {
+    const dark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  });
+</script>

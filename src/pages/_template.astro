@@ -1,0 +1,12 @@
+---
+// Prefixed with `_` so Astro never routes this — it's a reference implementation only.
+// Copy to `src/pages/<slug>.astro` (dropping the underscore) + `src/components/<slug>/`
+// (see context/_template/design.md) to make a real brand live.
+import BrandLayout from '@/layouts/BrandLayout.astro';
+import TemplateGuide from '@/components/_template/TemplateGuide.astro';
+import '@/components/_template/tokens.css';
+---
+
+<BrandLayout title="Your Brand — Brand Guide" description="One line describing the brand.">
+  <TemplateGuide />
+</BrandLayout>

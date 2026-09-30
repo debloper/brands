@@ -1,0 +1,27 @@
+---
+interface Props {
+  variant?: 'full' | 'icon' | 'wordmark';
+  theme?: 'light' | 'dark';
+  size?: number;
+  class?: string;
+}
+
+const { variant = 'full', theme = 'dark', size = 48, class: className = '' } = Astro.props;
+const fillColor = theme === 'dark' ? '#111111' : '#FFFFFF';
+---
+
+<!-- Replace this placeholder mark with your brand's actual logo SVG/markup. -->
+<div class={`inline-flex items-center gap-3 ${className}`}>
+  {
+    variant !== 'wordmark' && (
+      <svg width={size} height={size} viewBox="0 0 48 48" role="img" aria-label="Brand logo placeholder">
+        <rect x="4" y="4" width="40" height="40" rx="8" fill={fillColor} />
+      </svg>
+    )
+  }
+  {
+    variant !== 'icon' && (
+      <span style={{ color: fillColor, fontSize: `${size * 0.4}px`, fontWeight: 600 }}>Your Brand</span>
+    )
+  }
+</div>
