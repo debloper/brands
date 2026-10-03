@@ -1,0 +1,80 @@
+---
+import { typeScaleEntries } from './tokens';
+---
+
+<section>
+  <h2 class="text-2xl md:text-3xl font-medium text-foreground mb-3">Typography</h2>
+  <p class="text-muted-foreground mb-8 max-w-3xl">
+    Simple, accessible typography prioritizing clarity, simplicity, and wide Unicode support.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+    <div class="rounded-xl border border-border p-6 bg-card">
+      <p class="text-xs text-muted-foreground uppercase tracking-widest mb-1">Wordmark Typeface</p>
+      <p class="text-foreground font-medium text-lg mb-4" style="font-family: Montserrat, sans-serif;">Montserrat</p>
+      <p class="text-muted-foreground text-sm mb-4">
+        Used exclusively for the BreakerSpace wordmark in Light (300) or Thin (100) weights
+      </p>
+      <div class="rounded-lg p-6 border border-border bg-background">
+        <p class="text-4xl tracking-tight mb-2 text-foreground" style="font-family: Montserrat, sans-serif; font-weight: 300;">BreakerSpace</p>
+        <p class="text-muted-foreground" style="font-family: Montserrat, sans-serif; font-weight: 300; font-size: 1.25rem;">Aa Bb Cc Dd Ee Ff</p>
+      </div>
+    </div>
+
+    <div class="rounded-xl border border-border p-6 bg-card">
+      <p class="text-xs text-muted-foreground uppercase tracking-widest mb-1">Body &amp; UI Typeface</p>
+      <p class="text-foreground font-medium text-lg mb-4" style='font-family: "Noto Sans", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;'>System Font Stack</p>
+      <p class="text-muted-foreground text-sm mb-3 font-mono text-xs">
+        font-family: &quot;Noto Sans&quot;, Roboto, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
+      </p>
+      <p class="text-muted-foreground text-sm mb-4">
+        Prioritizes Noto Sans with native system fonts as fallback for wide Unicode support
+      </p>
+      <div class="rounded-lg p-6 border border-border bg-background">
+        <p class="text-2xl mb-2 text-foreground" style='font-family: "Noto Sans", Roboto, -apple-system, sans-serif;'>Aa Bb Cc Dd Ee Ff</p>
+        <p class="text-lg mb-2 text-muted-foreground" style='font-family: "Noto Sans", Roboto, -apple-system, sans-serif;'>0123456789 !@#$%</p>
+        <p class="text-sm text-muted-foreground" style='font-family: "Noto Sans", Roboto, -apple-system, sans-serif;'>Unicode: 你好 &bull; مرحبا &bull; नमस्ते &bull; Здравствуй</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="text-foreground font-medium text-lg mb-6">Type Scale</h3>
+  <div class="space-y-6 mb-10">
+    {
+      typeScaleEntries.map((entry) => (
+        <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 pb-4 border-b border-border last:border-0">
+          <div class="w-28 shrink-0">
+            <p class="text-xs text-muted-foreground uppercase tracking-widest">{entry.level}</p>
+          </div>
+          <div class="flex-1">
+            <p
+              class="text-foreground"
+              style={{
+                fontSize: entry.size,
+                lineHeight: entry.lineHeight,
+                fontWeight: entry.weight,
+                letterSpacing: entry.tracking === 'normal' ? undefined : entry.tracking,
+              }}
+            >
+              {entry.sample}
+            </p>
+          </div>
+          <div class="shrink-0 text-right">
+            <p class="text-xs font-mono text-muted-foreground">{entry.size} / {entry.weight}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="p-6 rounded-xl border border-border bg-accent/30">
+    <h3 class="text-foreground font-medium mb-3">Typography Guidelines</h3>
+    <ul class="space-y-2 text-muted-foreground text-sm">
+      <li class="flex items-start gap-2"><span class="text-foreground mt-0.5">&#x2022;</span><span>Montserrat is reserved for the BreakerSpace wordmark and identifiable brand entities only</span></li>
+      <li class="flex items-start gap-2"><span class="text-foreground mt-0.5">&#x2022;</span><span>Use system font stack everywhere else to ensure fast loading and wide device support</span></li>
+      <li class="flex items-start gap-2"><span class="text-foreground mt-0.5">&#x2022;</span><span>Noto Sans provides comprehensive Unicode coverage for international content</span></li>
+      <li class="flex items-start gap-2"><span class="text-foreground mt-0.5">&#x2022;</span><span>Avoid decorative or script fonts; keep typography simple and functional</span></li>
+      <li class="flex items-start gap-2"><span class="text-foreground mt-0.5">&#x2022;</span><span>Maintain high contrast ratios for accessibility (WCAG AA minimum)</span></li>
+    </ul>
+  </div>
+</section>

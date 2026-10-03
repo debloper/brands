@@ -1,0 +1,100 @@
+---
+import Logo from './Logo.astro';
+---
+
+<section>
+  <h2 class="text-2xl md:text-3xl font-medium text-foreground mb-3">Brand Applications</h2>
+  <p class="text-muted-foreground mb-8 max-w-3xl">
+    Examples of the BreakerSpace brand in use across various touchpoints.
+  </p>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="rounded-xl border border-border overflow-hidden">
+      <div class="p-8" style="background-color: #FAFCFE;">
+        <Logo variant="full" theme="dark" size={32} />
+        <div class="mt-8">
+          <p class="text-lg font-medium" style="font-family: Montserrat, sans-serif; font-weight: 300; color: #112233;">Soumya Deb</p>
+          <p class="text-sm" style="color: #667788;">Founder &amp; Director</p>
+          <p class="text-sm mt-2" style="color: #445566;">debs@breakerspace.org</p>
+        </div>
+      </div>
+      <div class="px-4 py-2 bg-card border-t border-border"><p class="text-xs text-muted-foreground">Business Card (Light)</p></div>
+    </div>
+
+    <div class="rounded-xl border border-border overflow-hidden">
+      <div class="p-8" style="background-color: #001122;">
+        <Logo variant="full" theme="light" size={32} />
+        <div class="mt-8">
+          <p class="text-lg font-medium" style="font-family: Montserrat, sans-serif; font-weight: 300; color: #DDEEFF;">Soumya Deb</p>
+          <p class="text-sm" style="color: #667788;">Founder &amp; Director</p>
+          <p class="text-sm mt-2" style="color: #445566;">debs@breakerspace.org</p>
+        </div>
+      </div>
+      <div class="px-4 py-2 bg-card border-t border-border"><p class="text-xs text-muted-foreground">Business Card (Dark)</p></div>
+    </div>
+
+    <div class="rounded-xl border border-border overflow-hidden">
+      <div class="p-8 flex items-center justify-center" style="background-color: #001122; min-height: 200px;">
+        <div class="rounded-2xl p-6" style="background-color: #001122;">
+          <Logo variant="icon" theme="light" size={80} />
+        </div>
+      </div>
+      <div class="px-4 py-2 bg-card border-t border-border"><p class="text-xs text-muted-foreground">App Icon</p></div>
+    </div>
+
+    <div class="rounded-xl border border-border overflow-hidden">
+      <div class="p-4" style="background-color: #FAFCFE;">
+        <div class="flex items-center justify-between mb-6">
+          <Logo variant="full" theme="dark" size={24} />
+          <div class="flex gap-4">
+            <span class="text-xs" style="color: #667788;">Product</span>
+            <span class="text-xs" style="color: #667788;">About</span>
+            <span class="text-xs" style="color: #667788;">Contact</span>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="h-3 rounded w-3/4" style="background-color: #CCDDEE;"></div>
+          <div class="h-3 rounded w-full" style="background-color: #EFF7FF;"></div>
+          <div class="h-3 rounded w-1/2" style="background-color: #EFF7FF;"></div>
+        </div>
+      </div>
+      <div class="px-4 py-2 bg-card border-t border-border"><p class="text-xs text-muted-foreground">Example Webpage (Light)</p></div>
+    </div>
+
+    <div class="rounded-xl border border-border overflow-hidden">
+      <div class="p-4" style="background-color: #001122;">
+        <div class="flex items-center justify-between mb-6">
+          <Logo variant="full" theme="light" size={24} />
+          <div class="flex gap-4">
+            <span class="text-xs" style="color: #667788;">Product</span>
+            <span class="text-xs" style="color: #667788;">About</span>
+            <span class="text-xs" style="color: #667788;">Contact</span>
+          </div>
+        </div>
+        <div class="space-y-2">
+          <div class="h-3 rounded w-2/3" style="background-color: #1A2D42;"></div>
+          <div class="h-3 rounded w-full" style="background-color: #112233;"></div>
+          <div class="h-3 rounded w-1/2" style="background-color: #112233;"></div>
+        </div>
+      </div>
+      <div class="px-4 py-2 bg-card border-t border-border"><p class="text-xs text-muted-foreground">Example Webpage (Dark)</p></div>
+    </div>
+
+    <div class="rounded-xl border border-border overflow-hidden">
+      <div class="p-6" style="background-color: #FAFCFE; min-height: 200px;">
+        <Logo variant="icon" theme="dark" size={28} />
+        <div class="mt-8 space-y-2">
+          <div class="h-2 rounded w-full" style="background-color: #CCDDEE;"></div>
+          <div class="h-2 rounded w-5/6" style="background-color: #EFF7FF;"></div>
+          <div class="h-2 rounded w-4/6" style="background-color: #EFF7FF;"></div>
+          <div class="h-2 rounded w-full" style="background-color: #EFF7FF;"></div>
+          <div class="h-2 rounded w-3/6" style="background-color: #EFF7FF;"></div>
+        </div>
+        <div class="mt-8 pt-4" style="border-top: 1px solid #CCDDEE;">
+          <p class="text-xs" style="color: #667788;">breakerspace.org</p>
+        </div>
+      </div>
+      <div class="px-4 py-2 bg-card border-t border-border"><p class="text-xs text-muted-foreground">Letterhead</p></div>
+    </div>
+  </div>
+</section>

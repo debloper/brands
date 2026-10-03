@@ -6,8 +6,8 @@ interface Props {
   class?: string;
 }
 
-const { variant = 'full', theme = 'dark', size = 48, class: className = '' } = Astro.props;
-const fillColor = theme === 'dark' ? '#111111' : '#FFFFFF';
+const { variant = 'full', theme, size = 48, class: className = '' } = Astro.props;
+const fillColor = theme === 'dark' ? '#111111' : theme === 'light' ? '#FFFFFF' : 'currentColor';
 ---
 
 <!-- Replace this placeholder mark with your brand's actual logo SVG/markup. -->

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import ThemeToggle from '@/components/ThemeToggle.astro';
 
 interface Props {
   title: string;
@@ -11,13 +12,14 @@ const { title, description } = Astro.props;
 
 <BaseLayout title={title} description={description}>
   <div class="border-b border-border bg-background/80 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 md:px-10 py-2.5">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-2.5 flex items-center justify-between">
       <a
         href={import.meta.env.BASE_URL}
         class="text-xs text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1"
       >
         &larr; All brand guides
       </a>
+      <ThemeToggle class="relative top-auto right-auto" />
     </div>
   </div>
   <slot />

@@ -1,0 +1,51 @@
+/*
+ * BreakerSpace Design Tokens — CSS Custom Properties
+ * Overrides the site's neutral :root/.dark variables for this brand's page only.
+ */
+:root {
+  --brand-dark-baseline: #001122;
+  --brand-dark-contrast: #DDEEFF;
+  --brand-light-baseline: #FAFCFE;
+  --brand-light-contrast: #112233;
+  --brand-slate: #445566;
+  --brand-gray-blue: #667788;
+  --brand-pale-blue: #CCDDEE;
+  --brand-bright-blue: #EFF7FF;
+
+  --radius: 0.625rem;
+  --background: #FAFCFE;
+  --foreground: #112233;
+  --card: #FFFFFF;
+  --card-foreground: #112233;
+  --primary: #112233;
+  --primary-foreground: #FAFCFE;
+  --secondary: #EFF7FF;
+  --secondary-foreground: #112233;
+  --muted: #EFF7FF;
+  --muted-foreground: #667788;
+  --accent: #CCDDEE;
+  --accent-foreground: #112233;
+  --destructive: #d4183d;
+  --border: #CCDDEE;
+  --input: #CCDDEE;
+  --ring: #445566;
+}
+
+.dark {
+  --background: #001122;
+  --foreground: #DDEEFF;
+  --card: #0A1525;
+  --card-foreground: #DDEEFF;
+  --primary: #DDEEFF;
+  --primary-foreground: #001122;
+  --secondary: #112233;
+  --secondary-foreground: #DDEEFF;
+  --muted: #112233;
+  --muted-foreground: #667788;
+  --accent: #112233;
+  --accent-foreground: #DDEEFF;
+  --destructive: #e63950;
+  --border: #1A2D42;
+  --input: #1A2D42;
+  --ring: #445566;
+}

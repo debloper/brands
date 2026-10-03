@@ -1,0 +1,54 @@
+---
+import Logo from './Logo.astro';
+---
+
+<section>
+  <h2 class="text-2xl md:text-3xl font-medium text-foreground mb-6">Key Takeaways</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div class="rounded-xl border border-border p-6 bg-card">
+      <p class="text-xs text-muted-foreground uppercase tracking-widest mb-2">Primary Colors</p>
+      <div class="flex gap-2 mb-3">
+        <div class="w-8 h-8 rounded-lg" style="background-color: #112233;"></div>
+        <div class="w-8 h-8 rounded-lg border border-border" style="background-color: #FAFCFE;"></div>
+      </div>
+      <p class="text-foreground text-sm font-medium">Light Mode</p>
+      <p class="text-muted-foreground text-xs font-mono">#112233 on #FAFCFE</p>
+      <div class="flex gap-2 mb-3 mt-3">
+        <div class="w-8 h-8 rounded-lg" style="background-color: #DDEEFF;"></div>
+        <div class="w-8 h-8 rounded-lg" style="background-color: #001122;"></div>
+      </div>
+      <p class="text-foreground text-sm font-medium">Dark Mode</p>
+      <p class="text-muted-foreground text-xs font-mono">#DDEEFF on #001122</p>
+    </div>
+
+    <div class="rounded-xl border border-border p-6 bg-card">
+      <p class="text-xs text-muted-foreground uppercase tracking-widest mb-2">Typography</p>
+      <p class="text-foreground text-sm" style="font-family: Montserrat, sans-serif; font-weight: 300;">Montserrat</p>
+      <p class="text-muted-foreground text-xs mb-3">Branding only</p>
+      <p class="text-foreground text-sm" style='font-family: "Noto Sans", sans-serif;'>System Fonts</p>
+      <p class="text-muted-foreground text-xs">All other text</p>
+    </div>
+
+    <div class="rounded-xl border border-border p-6 bg-card">
+      <p class="text-xs text-muted-foreground uppercase tracking-widest mb-2">Color System</p>
+      <div class="flex items-center gap-2 mb-2">
+        <div class="w-6 h-6 rounded-full" style="background-color: #001122;"></div>
+        <div class="w-6 h-6 rounded-full" style="background-color: #445566;"></div>
+        <div class="w-6 h-6 rounded-full" style="background-color: #667788;"></div>
+        <div class="w-6 h-6 rounded-full" style="background-color: #CCDDEE;"></div>
+        <div class="w-6 h-6 rounded-full" style="background-color: #DDEEFF;"></div>
+      </div>
+      <p class="text-foreground text-sm font-medium">HSL 210°</p>
+      <p class="text-muted-foreground text-xs">Varying saturation &amp; luminosity</p>
+    </div>
+
+    <div class="rounded-xl border border-border p-6 bg-card">
+      <p class="text-xs text-muted-foreground uppercase tracking-widest mb-2">Logo Clear Space</p>
+      <div class="flex items-center justify-center my-4">
+        <Logo variant="icon" size={48} />
+      </div>
+      <p class="text-foreground text-sm font-medium text-center">Equal to 1 grid unit</p>
+      <p class="text-muted-foreground text-xs text-center">Height of one logo square</p>
+    </div>
+  </div>
+</section>

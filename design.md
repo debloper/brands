@@ -55,19 +55,26 @@ name. If you find yourself wanting one, you're fighting the architecture — ext
 
 ## 4. Dark/light mode
 
-The landing page (`/`) has a dark/light toggle, defaulting to the visitor's OS preference and
-persisting their explicit choice in `localStorage` (`theme` key). It's implemented as a single
-self-contained component, `src/components/ThemeToggle.astro` — it renders the toggle button and
-also carries its own `is:inline` init script (reads the stored/system preference and applies the
-`.dark` class on `<html>` synchronously, before paint, to avoid a flash of the wrong theme). Drop
-`<ThemeToggle />` as the first thing in a page's body to get both behaviors at once; it renders
-`position: fixed` so where exactly it sits in the DOM doesn't affect layout.
+Both the landing page (`/`) and all brand guide pages support light and dark modes, defaulting to
+the visitor's OS preference (`prefers-color-scheme: dark`) and persisting explicit choices in
+`localStorage` (`theme` key).
 
-Brand pages **do not** have this yet — deliberately, so each brand's dark-mode support ships
-brand-by-brand instead of all at once. Each brand's `tokens.css` already has a `.dark` block as
-scaffolding (Tailwind's `dark:` variant and the `.dark` CSS custom properties are ready), so
-adding brand-level dark mode later should just mean reusing `<ThemeToggle />` inside that brand's
-page/guide component — no new mechanism needed.
+The toggle is implemented as a self-contained component, `src/components/ThemeToggle.astro`:
+- Carries an `is:inline` init script that reads the stored or system preference and applies the
+  `.dark` class on `<html>` synchronously before paint, eliminating flashes of the wrong theme.
+- Also listens to OS color-scheme change events so the display reacts if the visitor flips system
+  settings while viewing without an explicit override.
+- Renders `fixed top-4 right-4 z-50` by default (used on the landing page), or accepts a custom
+  class (such as `relative top-auto right-auto`, embedded inside `BrandLayout.astro`'s sticky
+  navigation bar alongside the "← All brand guides" link).
+
+Each brand provides its own color scheme for both modes via its `tokens.css`:
+- `:root` defines the light mode palette (e.g. BreakerSpace `--background: #FAFCFE`, `--foreground: #112233`).
+- `.dark` defines the brand's own dark/night mode palette (e.g. BreakerSpace `--background: #001122`, `--foreground: #DDEEFF`, `--card: #0A1525`).
+
+Toggling the theme flips the `.dark` class on `<html>`, instantly switching custom properties to
+that brand's own dark color scheme. BreakerSpace components and logo adapt dynamically to the
+active theme via `currentColor` / `--foreground`.
 
 ## 5. Adding a new brand
 
@@ -112,7 +119,7 @@ Implementation:
 | `src/components/<slug>/tokens.ts` | suggested | Same values as typed constants, for programmatic use |
 | `src/components/<slug>/Logo.astro` | suggested | Logo component |
 | `src/components/<slug>/<Brand>Guide.astro` | suggested | The composed guide content, kept out of the page file for readability |
-| `src/components/<slug>/components/` | optional | Internal presentation pieces used only by the guide component |
+| `src/components/<slug>/*.astro` | optional | Brand-specific presentation components kept alongside the guide and logo |
 
 `src/components/` is never scanned by Astro's router, so nothing under `src/components/<slug>/`
 needs an underscore prefix or any other routing-safety convention — only `src/pages/` is

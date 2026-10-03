@@ -1,0 +1,66 @@
+---
+import Logo from './Logo.astro';
+---
+
+<section>
+  <h2 class="text-2xl md:text-3xl font-medium text-foreground mb-3">Logo</h2>
+  <p class="text-muted-foreground mb-8 max-w-3xl">
+    The BreakerSpace logo features seven rounded squares, rotated to diamond shape, on a
+    nine-square grid, in the likeness of an arrow or a flame. The center cell is intentionally
+    void, creating negative space that forms the &ldquo;flame core.&rdquo;
+  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {
+      [
+        { label: 'Dark on Light', variant: 'full' as const, theme: 'dark' as const, bg: '#FAFCFE', size: 48, description: 'Default for light backgrounds' },
+        { label: 'Light on Dark', variant: 'full' as const, theme: 'light' as const, bg: '#001122', size: 48, description: 'Default for dark backgrounds' },
+        { label: 'Dark Icon Only', variant: 'icon' as const, theme: 'dark' as const, bg: '#FAFCFE', size: 64, description: 'Favicons, app icons, small UI' },
+        { label: 'Light Icon Only', variant: 'icon' as const, theme: 'light' as const, bg: '#001122', size: 64, description: 'Dark mode icons' },
+        { label: 'Dark Wordmark Only', variant: 'wordmark' as const, theme: 'dark' as const, bg: '#FAFCFE', size: 64, description: 'Text-only light contexts' },
+        { label: 'Light Wordmark Only', variant: 'wordmark' as const, theme: 'light' as const, bg: '#001122', size: 64, description: 'Text-only dark contexts' },
+      ].map((v) => (
+        <div
+          class="rounded-2xl p-8 flex flex-col items-center justify-center min-h-[200px] border border-border"
+          style={{ backgroundColor: v.bg }}
+        >
+          <Logo variant={v.variant} theme={v.theme} size={v.size} />
+          <p class="text-center mt-6 text-sm font-medium" style={{ color: v.theme === 'dark' ? '#112233' : '#DDEEFF' }}>
+            {v.label}
+          </p>
+          <p class="text-center mt-1 text-xs" style={{ color: '#667788' }}>
+            {v.description}
+          </p>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="mt-8 p-6 rounded-xl border border-border bg-card">
+    <h3 class="text-foreground font-medium mb-3">Available Assets</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="flex items-center gap-3 p-3 rounded-lg bg-background border border-border">
+        <div class="w-8 h-8 rounded bg-foreground/10 flex items-center justify-center text-xs font-mono text-muted-foreground">SVG</div>
+        <div>
+          <p class="text-foreground text-sm font-medium">SVG (Dark Version)</p>
+          <p class="text-muted-foreground text-xs">breakerspace-logo-dark.svg &middot; Color: #112233</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-3 p-3 rounded-lg bg-background border border-border">
+        <div class="w-8 h-8 rounded bg-foreground/10 flex items-center justify-center text-xs font-mono text-muted-foreground">SVG</div>
+        <div>
+          <p class="text-foreground text-sm font-medium">SVG (Light Version)</p>
+          <p class="text-muted-foreground text-xs">breakerspace-logo-light.svg &middot; Color: #fafcfe</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-6 p-6 rounded-xl border border-border bg-accent/30">
+    <h3 class="text-foreground font-medium mb-2">Clear Space</h3>
+    <p class="text-muted-foreground text-sm">
+      Maintain a minimum clear space around the logo equal to the height of one logo square (one
+      grid unit). Never place text, graphics, or other elements within this zone.
+    </p>
+  </div>
+</section>

@@ -17,7 +17,7 @@ const metaModules = import.meta.glob<{ default: BrandMeta }>(
 // (Astro already routes `src/pages/**` on its own). `index.astro` (the landing page) is
 // excluded at the glob level to avoid Vite warning about it being both statically and
 // dynamically imported.
-const pageModules = import.meta.glob(['/src/pages/*.astro', '!/src/pages/index.astro']);
+const pageModules = import.meta.glob(['/src/pages/*.astro', '!/src/pages/index.astro'], { query: '?raw' });
 
 function contextSlugFromPath(path: string): string {
   const match = path.match(/^\/context\/([^/]+)\//);

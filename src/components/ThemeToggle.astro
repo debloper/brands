@@ -1,9 +1,9 @@
 ---
-// Self-contained: drop `<ThemeToggle />` as the first thing inside <body> (it renders
-// `position: fixed`, so placement in the DOM doesn't affect layout) and it handles
-// everything — reading/applying the stored or system preference before paint, and
-// toggling + persisting it on click. Not yet used on brand pages — see design.md
-// "Dark/light mode" for the plan to reuse this once brand-level theming is added.
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'fixed top-4 right-4 z-50' } = Astro.props;
 ---
 
 {/* is:inline + placed first: runs synchronously before paint, so there's no flash of the wrong theme. */}
@@ -16,10 +16,9 @@
 </script>
 
 <button
-  id="theme-toggle"
   type="button"
   aria-label="Toggle dark mode"
-  class="fixed top-4 right-4 z-50 rounded-full border border-border bg-background p-2 text-foreground shadow-sm hover:bg-accent transition-colors cursor-pointer"
+  class={`theme-toggle rounded-full border border-border bg-background p-2 text-foreground shadow-sm hover:bg-accent transition-colors cursor-pointer ${className}`}
 >
   <svg class="block dark:hidden" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
     <circle cx="12" cy="12" r="4" />
@@ -31,8 +30,10 @@
 </button>
 
 <script>
-  document.getElementById('theme-toggle')?.addEventListener('click', () => {
-    const dark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
+  document.querySelectorAll('.theme-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const dark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    });
   });
 </script>

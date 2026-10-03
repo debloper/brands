@@ -1,0 +1,106 @@
+---
+import Logo from './Logo.astro';
+import LogoSection from './LogoSection.astro';
+import ColorSection from './ColorSection.astro';
+import TypographySection from './TypographySection.astro';
+import ApplicationsSection from './ApplicationsSection.astro';
+import CodeExportSection from './CodeExportSection.astro';
+import TakeawaysSection from './TakeawaysSection.astro';
+import AssetMatrixSection from './AssetMatrixSection.astro';
+
+const sections = [
+  { id: 'logo', label: 'Logo' },
+  { id: 'colors', label: 'Colors' },
+  { id: 'typography', label: 'Typography' },
+  { id: 'applications', label: 'Applications' },
+  { id: 'code', label: 'Code Export' },
+  { id: 'takeaways', label: 'Key Takeaways' },
+  { id: 'assets', label: 'Asset Matrix' },
+];
+---
+
+<div class="min-h-screen flex flex-col bg-background">
+  <header class="border-b border-border bg-background">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-10 md:py-14">
+      <div class="flex items-center gap-4 mb-4">
+        <Logo variant="full" size={40} />
+      </div>
+      <h1 class="text-3xl md:text-4xl font-medium text-foreground tracking-tight">Brand Kit</h1>
+      <p class="text-muted-foreground mt-2 text-sm">Version 2.0 — June 2026 &middot; Design System Specification</p>
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-10 py-12 flex-1 w-full">
+    <div class="flex gap-8">
+      <nav class="hidden lg:block sticky top-16 w-48 shrink-0 self-start" aria-label="Section navigation" data-section-nav>
+        <p class="text-xs text-muted-foreground uppercase tracking-widest mb-4">Sections</p>
+        <ul class="space-y-1">
+          {
+            sections.map((s, i) => (
+              <li>
+                <button
+                  type="button"
+                  data-nav-target={s.id}
+                  class:list={[
+                    'nav-btn w-full text-left text-sm py-1.5 px-3 rounded-md transition-colors cursor-pointer',
+                    i === 0 ? 'bg-accent text-foreground font-medium' : 'text-muted-foreground hover:text-foreground hover:bg-accent/50',
+                  ]}
+                >
+                  {s.label}
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <main class="flex-1 space-y-20 min-w-0">
+        <div id="logo"><LogoSection /></div>
+        <div id="colors"><ColorSection /></div>
+        <div id="typography"><TypographySection /></div>
+        <div id="applications"><ApplicationsSection /></div>
+        <div id="code"><CodeExportSection /></div>
+        <div id="takeaways"><TakeawaysSection /></div>
+        <div id="assets"><AssetMatrixSection /></div>
+      </main>
+    </div>
+  </div>
+
+  <footer class="border-t border-border mt-auto">
+    <div class="max-w-7xl mx-auto px-6 md:px-10 py-6">
+      <p class="text-muted-foreground text-sm">&copy; 2026 BreakerSpace. All rights reserved.</p>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-section-nav]');
+  if (nav) {
+    const buttons = nav.querySelectorAll<HTMLButtonElement>('.nav-btn');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.getElementById(btn.dataset.navTarget!)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    const setActive = (id: string) => {
+      buttons.forEach((b) => {
+        const active = b.dataset.navTarget === id;
+        b.classList.toggle('bg-accent', active);
+        b.classList.toggle('text-foreground', active);
+        b.classList.toggle('font-medium', active);
+        b.classList.toggle('text-muted-foreground', !active);
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      },
+      { rootMargin: '-20% 0px -70% 0px' },
+    );
+    document.querySelectorAll('main section[id], main > div[id]').forEach((s) => observer.observe(s));
+  }
+</script>

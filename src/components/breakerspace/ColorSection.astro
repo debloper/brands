@@ -1,0 +1,148 @@
+---
+import CopyButton from '@/components/CopyButton.astro';
+import { colorPaletteEntries } from './tokens';
+
+const primaryEntries = colorPaletteEntries.slice(0, 4);
+const extendedEntries = colorPaletteEntries.slice(4);
+const lightHexes = new Set(['#FAFCFE', '#DDEEFF', '#EFF7FF', '#CCDDEE']);
+---
+
+<section>
+  <h2 class="text-2xl md:text-3xl font-medium text-foreground mb-3">Color Palette</h2>
+  <p class="text-muted-foreground mb-8 max-w-3xl">
+    BreakerSpace uses a monotone color system based on HSL hue 210° with varying saturation and
+    luminosity. This approach ensures accessibility for color-blind users while maintaining
+    visual hierarchy through contrast.
+  </p>
+
+  <div class="flex gap-1 mb-8 p-1 bg-muted rounded-lg w-fit" data-tabs="color">
+    <button type="button" data-tab-target="primary" class="tab-btn px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer bg-background text-foreground shadow-sm">Primary Brand Colors</button>
+    <button type="button" data-tab-target="extended" class="tab-btn px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer text-muted-foreground hover:text-foreground">Extended Palette</button>
+    <button type="button" data-tab-target="philosophy" class="tab-btn px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer text-muted-foreground hover:text-foreground">Color Philosophy</button>
+  </div>
+
+  <div data-tab-panel="primary" data-tabs-group="color">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {
+        primaryEntries.map((c) => (
+          <div class="group rounded-xl border border-border overflow-hidden bg-card">
+            <div class="h-32 flex items-end p-4" style={{ backgroundColor: c.hex }}>
+              <span class="text-xs font-mono font-medium" style={{ color: lightHexes.has(c.hex) ? '#112233' : '#DDEEFF' }}>
+                {c.hex}
+              </span>
+            </div>
+            <div class="p-4 space-y-1">
+              <p class="text-foreground font-medium text-sm">{c.name}</p>
+              <p class="text-muted-foreground text-xs font-mono">{c.hsl}</p>
+              <p class="text-muted-foreground text-xs">{c.role}</p>
+              <div class="mt-2">
+                <CopyButton text={c.hex} label={`Copy ${c.hex}`} />
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div data-tab-panel="extended" data-tabs-group="color" class="hidden">
+    <p class="text-muted-foreground text-sm mb-4">HSL Hue 210° Variations (indicative, non-exhaustive)</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {
+        extendedEntries.map((c) => (
+          <div class="group rounded-xl border border-border overflow-hidden bg-card">
+            <div class="h-32 flex items-end p-4" style={{ backgroundColor: c.hex }}>
+              <span class="text-xs font-mono font-medium" style={{ color: lightHexes.has(c.hex) ? '#112233' : '#DDEEFF' }}>
+                {c.hex}
+              </span>
+            </div>
+            <div class="p-4 space-y-1">
+              <p class="text-foreground font-medium text-sm">{c.name}</p>
+              <p class="text-muted-foreground text-xs font-mono">{c.hsl}</p>
+              <p class="text-muted-foreground text-xs">{c.role}</p>
+              <div class="mt-2">
+                <CopyButton text={c.hex} label={`Copy ${c.hex}`} />
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+
+  <div data-tab-panel="philosophy" data-tabs-group="color" class="hidden">
+    <div class="max-w-2xl space-y-4">
+      <p class="text-foreground">
+        All colors derive from a single hue (210°) on the HSL scale. By adjusting only saturation
+        and luminosity, we create visual hierarchy and contrast while maintaining a cohesive,
+        accessible design system.
+      </p>
+      <ul class="space-y-2 text-muted-foreground">
+        <li class="flex items-start gap-2"><span class="text-foreground mt-0.5">&#x2022;</span><span>Monotone approach accommodates color-blind users by ensuring contrast relies on luminosity, not hue differentiation</span></li>
+        <li class="flex items-start gap-2"><span class="text-foreground mt-0.5">&#x2022;</span><span>Consistent hue creates instant brand recognition across all touchpoints and media</span></li>
+        <li class="flex items-start gap-2"><span class="text-foreground mt-0.5">&#x2022;</span><span>Luminosity contrast ensures readability at all sizes and across both light and dark modes</span></li>
+        <li class="flex items-start gap-2"><span class="text-foreground mt-0.5">&#x2022;</span><span>Simple system reduces complexity for designers and engineers — one hue, infinite hierarchy</span></li>
+      </ul>
+
+      <div class="mt-6">
+        <h3 class="text-foreground font-medium mb-3">Contrast Ratios</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="border-b border-border">
+                <th class="text-left py-2 pr-4 text-muted-foreground font-medium">Pair</th>
+                <th class="text-left py-2 pr-4 text-muted-foreground font-medium">Ratio</th>
+                <th class="text-left py-2 text-muted-foreground font-medium">WCAG Level</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-border">
+                <td class="py-2 pr-4 text-foreground font-mono text-xs">#112233 on #FAFCFE</td>
+                <td class="py-2 pr-4 text-foreground">15.8:1</td>
+                <td class="py-2"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs font-medium">AAA</span></td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="py-2 pr-4 text-foreground font-mono text-xs">#DDEEFF on #001122</td>
+                <td class="py-2 pr-4 text-foreground">14.2:1</td>
+                <td class="py-2"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300 text-xs font-medium">AAA</span></td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="py-2 pr-4 text-foreground font-mono text-xs">#667788 on #FAFCFE</td>
+                <td class="py-2 pr-4 text-foreground">5.1:1</td>
+                <td class="py-2"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 text-xs font-medium">AA</span></td>
+              </tr>
+              <tr>
+                <td class="py-2 pr-4 text-foreground font-mono text-xs">#667788 on #001122</td>
+                <td class="py-2 pr-4 text-foreground">4.6:1</td>
+                <td class="py-2"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300 text-xs font-medium">AA</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((group) => {
+    const groupName = group.dataset.tabs!;
+    const buttons = group.querySelectorAll<HTMLButtonElement>('.tab-btn');
+    const panels = document.querySelectorAll<HTMLElement>(`[data-tabs-group="${groupName}"]`);
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tabTarget;
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('bg-background', active);
+          b.classList.toggle('text-foreground', active);
+          b.classList.toggle('shadow-sm', active);
+          b.classList.toggle('text-muted-foreground', !active);
+        });
+        panels.forEach((p) => {
+          p.classList.toggle('hidden', p.dataset.tabPanel !== target);
+        });
+      });
+    });
+  });
+</script>

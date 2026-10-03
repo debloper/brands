@@ -1,0 +1,46 @@
+---
+const assets = [
+  { asset: 'Logo — Astro Component', format: 'ASTRO', path: 'src/components/breakerspace/Logo.astro', usage: 'All web contexts (variant + theme props)' },
+  { asset: 'Design Tokens — CSS', format: 'CSS', path: 'src/components/breakerspace/tokens.css', usage: 'Root stylesheet override, drop-in import' },
+  { asset: 'Design Tokens — TypeScript', format: 'TS', path: 'src/components/breakerspace/tokens.ts', usage: 'Programmatic access to brand values' },
+  { asset: 'Design Specification', format: 'MD', path: 'context/breakerspace/design.md', usage: 'Source of truth for all brand decisions' },
+  { asset: 'Brand Guide Page', format: 'ASTRO', path: 'src/pages/breakerspace.astro', usage: 'Live, routed interactive specification' },
+  { asset: 'Logo — SVG', format: 'SVG', path: 'context/breakerspace/assets/logo.svg', usage: 'Print, non-web contexts' },
+  { asset: 'Logo — PNG', format: 'PNG', path: 'context/breakerspace/assets/logo.png', usage: 'Raster fallback' },
+  { asset: 'Favicon', format: 'PNG', path: 'context/breakerspace/assets/favicon.png', usage: 'Browser tab icon' },
+  { asset: 'Archived v1 Reference', format: 'HTML', path: 'context/breakerspace/assets/branding.html', usage: 'Figma export, historical reference only' },
+];
+---
+
+<section>
+  <h2 class="text-2xl md:text-3xl font-medium text-foreground mb-3">Asset Matrix</h2>
+  <p class="text-muted-foreground mb-6 max-w-3xl">
+    Complete mapping of all brand assets, their file formats, source paths, and intended usage
+    contexts. Every path below is relative to this entity's own directory — copy the whole
+    directory to reuse it elsewhere.
+  </p>
+  <div class="overflow-x-auto rounded-xl border border-border">
+    <table class="w-full text-sm border-collapse">
+      <thead>
+        <tr class="bg-muted/50">
+          <th class="text-left py-3 px-4 text-muted-foreground font-medium">Asset</th>
+          <th class="text-left py-3 px-4 text-muted-foreground font-medium">Format</th>
+          <th class="text-left py-3 px-4 text-muted-foreground font-medium">Path</th>
+          <th class="text-left py-3 px-4 text-muted-foreground font-medium">Usage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          assets.map((a, i) => (
+            <tr class={i < assets.length - 1 ? 'border-b border-border' : ''}>
+              <td class="py-3 px-4 text-foreground font-medium">{a.asset}</td>
+              <td class="py-3 px-4"><span class="px-2 py-0.5 rounded bg-muted text-muted-foreground text-xs font-mono">{a.format}</span></td>
+              <td class="py-3 px-4 text-foreground font-mono text-xs">{a.path}</td>
+              <td class="py-3 px-4 text-muted-foreground">{a.usage}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

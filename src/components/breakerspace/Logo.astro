@@ -1,0 +1,88 @@
+---
+interface Props {
+  /** Logo variant */
+  variant?: 'full' | 'icon' | 'wordmark';
+  /** Explicit color theme: 'dark' for #112233, 'light' for #DDEEFF. If omitted, uses currentColor to adapt to the surrounding text/mode. */
+  theme?: 'light' | 'dark';
+  /** Size in pixels */
+  size?: number;
+  class?: string;
+}
+
+const { variant = 'full', theme, size = 48, class: className = '' } = Astro.props;
+
+const fillColor = theme === 'dark' ? '#112233' : theme === 'light' ? '#DDEEFF' : 'currentColor';
+const iconSize = variant === 'wordmark' ? size * 0.6 : size;
+const wordmarkFontSize = `${size * 0.45}px`;
+---
+
+{
+  variant === 'wordmark' ? (
+    <span
+      class={className}
+      style={{
+        fontFamily: 'Montserrat, sans-serif',
+        fontWeight: 300,
+        letterSpacing: '-0.025em',
+        color: fillColor,
+        fontSize: wordmarkFontSize,
+        lineHeight: '1',
+      }}
+    >
+      BreakerSpace
+    </span>
+  ) : variant === 'icon' ? (
+    <svg
+      viewBox="0 0 1024 1024"
+      xmlns="http://www.w3.org/2000/svg"
+      width={iconSize}
+      height={iconSize}
+      class={className}
+      aria-label="BreakerSpace logo"
+      role="img"
+    >
+      {/* Row 0 */}
+      <rect x="447.06" y="-277.02" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+      <rect x="673.33" y="-277.02" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+      <rect x="899.61" y="-277.02" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+      {/* Row 1 — center void, forms the "flame core" */}
+      <rect x="447.06" y="-50.75" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+      <rect x="899.61" y="-50.75" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+      {/* Row 2 */}
+      <rect x="447.06" y="175.53" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+      <rect x="673.33" y="175.53" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+    </svg>
+  ) : (
+    <div class={`flex items-center gap-3 ${className}`}>
+      <svg
+        viewBox="0 0 1024 1024"
+        xmlns="http://www.w3.org/2000/svg"
+        width={iconSize}
+        height={iconSize}
+        aria-label="BreakerSpace logo"
+        role="img"
+      >
+        <rect x="447.06" y="-277.02" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+        <rect x="673.33" y="-277.02" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+        <rect x="899.61" y="-277.02" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+        <rect x="447.06" y="-50.75" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+        <rect x="899.61" y="-50.75" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+        <rect x="447.06" y="175.53" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+        <rect x="673.33" y="175.53" fill={fillColor} stroke={fillColor} stroke-width="4" width="192" height="192" rx="48" ry="48" transform="rotate(45)" />
+      </svg>
+      <span
+        style={{
+          fontFamily: 'Montserrat, sans-serif',
+          fontWeight: 300,
+          letterSpacing: '-0.025em',
+          color: fillColor,
+          fontSize: wordmarkFontSize,
+          lineHeight: '1',
+        }}
+      >
+        BreakerSpace
+      </span>
+    </div>
+  )
+}
+

@@ -1,0 +1,131 @@
+---
+import CopyButton from '@/components/CopyButton.astro';
+
+const cssCode = `/* BreakerSpace Design Tokens — CSS Custom Properties */
+
+:root {
+  --brand-dark-baseline: #001122;
+  --brand-dark-contrast: #DDEEFF;
+  --brand-light-baseline: #FAFCFE;
+  --brand-light-contrast: #112233;
+  --brand-slate: #445566;
+  --brand-gray-blue: #667788;
+  --brand-pale-blue: #CCDDEE;
+  --brand-bright-blue: #EFF7FF;
+
+  --background: #FAFCFE;
+  --foreground: #112233;
+  --primary: #112233;
+  --primary-foreground: #FAFCFE;
+  --secondary: #EFF7FF;
+  --secondary-foreground: #112233;
+  --muted: #EFF7FF;
+  --muted-foreground: #667788;
+  --accent: #CCDDEE;
+  --accent-foreground: #112233;
+  --border: #CCDDEE;
+  --input: #CCDDEE;
+  --ring: #445566;
+}
+
+.dark {
+  --background: #001122;
+  --foreground: #DDEEFF;
+  --primary: #DDEEFF;
+  --primary-foreground: #001122;
+  --secondary: #112233;
+  --secondary-foreground: #DDEEFF;
+  --muted: #112233;
+  --muted-foreground: #667788;
+  --accent: #112233;
+  --accent-foreground: #DDEEFF;
+  --border: #1A2D42;
+  --input: #1A2D42;
+  --ring: #445566;
+}`;
+
+const tsCode = `// BreakerSpace Design Tokens — TypeScript
+import { brandColors, brandTypeScale, brandSpacing } from 'src/components/breakerspace/tokens';
+
+const bgColor = brandColors.lightBaseline; // '#FAFCFE'
+const headingSize = brandTypeScale.h1.size; // '3rem'
+const spacing8 = brandSpacing.values[8];    // '2rem'`;
+
+const tailwindCode = `// tailwind config — BreakerSpace brand extension (v3-style, for reference)
+export default {
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          'dark-baseline': '#001122',
+          'dark-contrast': '#DDEEFF',
+          'light-baseline': '#FAFCFE',
+          'light-contrast': '#112233',
+          slate: '#445566',
+          'gray-blue': '#667788',
+          'pale-blue': '#CCDDEE',
+          'bright-blue': '#EFF7FF',
+        },
+      },
+      fontFamily: {
+        wordmark: ['Montserrat', 'sans-serif'],
+        body: ['"Noto Sans"', 'Roboto', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
+      },
+    },
+  },
+};`;
+---
+
+<section>
+  <h2 class="text-2xl md:text-3xl font-medium text-foreground mb-3">Code Export</h2>
+  <p class="text-muted-foreground mb-8 max-w-3xl">
+    Copy design tokens directly into your project. All tokens are available as CSS custom
+    properties, TypeScript constants, and (if you use it) Tailwind configuration.
+  </p>
+
+  <div class="flex gap-1 mb-4 p-1 bg-muted rounded-lg w-fit" data-tabs="code">
+    <button type="button" data-tab-target="css" class="tab-btn px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer bg-background text-foreground shadow-sm">CSS Tokens</button>
+    <button type="button" data-tab-target="ts" class="tab-btn px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer text-muted-foreground hover:text-foreground">TypeScript</button>
+    <button type="button" data-tab-target="tailwind" class="tab-btn px-4 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer text-muted-foreground hover:text-foreground">Tailwind Config</button>
+  </div>
+
+  {
+    ([
+      ['css', cssCode],
+      ['ts', tsCode],
+      ['tailwind', tailwindCode],
+    ] as const).map(([key, code], i) => (
+      <div data-tab-panel={key} data-tabs-group="code" class:list={{ hidden: i !== 0 }}>
+        <div class="relative">
+          <div class="absolute top-3 right-3 z-10">
+            <CopyButton text={code} label="Copy code" />
+          </div>
+          <pre class="bg-[#001122] dark:bg-[#061220] text-[#DDEEFF] border border-border p-6 rounded-xl overflow-x-auto text-sm font-mono leading-relaxed"><code set:text={code} /></pre>
+        </div>
+      </div>
+    ))
+  }
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-tabs]').forEach((group) => {
+    const groupName = group.dataset.tabs!;
+    const buttons = group.querySelectorAll<HTMLButtonElement>('.tab-btn');
+    const panels = document.querySelectorAll<HTMLElement>(`[data-tabs-group="${groupName}"]`);
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.tabTarget;
+        buttons.forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle('bg-background', active);
+          b.classList.toggle('text-foreground', active);
+          b.classList.toggle('shadow-sm', active);
+          b.classList.toggle('text-muted-foreground', !active);
+        });
+        panels.forEach((p) => {
+          p.classList.toggle('hidden', p.dataset.tabPanel !== target);
+        });
+      });
+    });
+  });
+</script>

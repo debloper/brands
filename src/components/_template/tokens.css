@@ -3,10 +3,9 @@
  * same variable names (`--background`, `--foreground`, etc.) so the shared
  * layouts and any shadcn/ui-style components continue to work unmodified.
  *
- * The `.dark` block below is scaffolding for brand-level dark/light mode, which isn't wired
- * up yet (only the landing page has a theme toggle so far — see design.md "Dark/light mode").
- * Keep it filled in with real values; when brand theming ships it'll be toggled the same way,
- * via `src/components/ThemeToggle.astro`.
+ * The `.dark` block below configures your brand's dark mode color scheme.
+ * BrandLayout automatically renders a ThemeToggle in the top navigation bar,
+ * defaulting to system preference and toggling `.dark` on <html>.
  */
 :root {
   --radius: 0.625rem;
